@@ -87,15 +87,5 @@
                 {{ $slot }}
             </main>
         </div>
-        <script>
-            const modals = document.querySelectorAll('[data-modal-toggle]');
-            modals.forEach(trigger => {
-                trigger.addEventListener('click', () => {
-                    const modalId = trigger.getAttribute('data-modal-target');
-                    const modal = document.getElementById(modalId);
-                    modal.classList.toggle('hidden');
-                });
-            });
-        </script>
     </body>
 </html>
