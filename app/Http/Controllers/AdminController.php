@@ -37,7 +37,22 @@ class AdminController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            
-        ])
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'password' => [],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+        ]);
+
+        $user->update($request->only(['first_name', 'last_name', 'email', 'password']));
+        return redirect()->route('admin.dashboard')->with('success','User updated successfully');
+    }
+
+    public function delete(User $user)
+    {
+        if($user->hasRole('Admin')){
+            return back()->with('error', 'Cannot delete admin users');
+        }
+        $user->delete();
+        return redirect()->route('admin.dashboard')->with('success', 'User deleted successfully');
     }
 }
