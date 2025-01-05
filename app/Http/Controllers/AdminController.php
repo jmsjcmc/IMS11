@@ -53,12 +53,21 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard')->with('success','User updated successfully');
     }
 
+    // public function delete(User $user)
+    // {
+    //     if($user->hasRole('Admin')){
+    //         return back()->with('error', 'Cannot delete admin users');
+    //     }
+    //     $user->delete();
+    //     return redirect()->route('admin.dashboard')->with('success', 'User deleted successfully');
+    // }
+
     public function delete(User $user)
-    {
-        if($user->hasRole('Admin')){
-            return back()->with('error', 'Cannot delete admin users');
-        }
-        $user->delete();
-        return redirect()->route('admin.dashboard')->with('success', 'User deleted successfully');
+{
+    if($user->hasRole('Admin')){
+        return back()->with('error', 'Cannot delete admin users');
     }
+    $user->delete();
+    return redirect()->route('admin.dashboard')->with('success', 'User deleted successfully');
+}
 }
